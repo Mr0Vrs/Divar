@@ -4,7 +4,7 @@ from re import match, sub
 from time import sleep
 from threading import Thread
 from sys import platform
-from os.path import basename, dirname, abspath; mainPath = __file__
+from os.path import basename, dirname, abspath; mainPath =__file__
 from os import rename, chdir; chdir(dirname(abspath(mainPath)))
 import os
 mainName = 'Divar.py'; mainFName = basename(mainPath)
