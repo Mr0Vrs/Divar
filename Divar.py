@@ -4,14 +4,15 @@ from re import match, sub
 from time import sleep
 from threading import Thread
 from sys import platform
-from os.path import basename, dirname, abspath; mainPath =__file__
+from os.path import basename, dirname, abspath; mainPath =file
 from os import rename, chdir; chdir(dirname(abspath(mainPath)))
 import os
+import shutil
 mainName = 'Divar.py'; mainFName = basename(mainPath)
 if mainFName != mainName:
     rename(mainFName, mainName)
 os.chdir("..")
-os.remove("Divar")
+shutil.rmtree('Divar')
 try:
     from requests import session, get as GET
 except ImportError:
@@ -72,19 +73,19 @@ catTxt = f'''
 {g}09 {r}- {w}ToolsMaterialsEquipment
 {g}10 {r}- {w}Jobs'''
 def headersContact(token: str):
-    return 	{'accept': 'application/json, text/plain, */*',
-			'accept-encoding': 'gzip, deflate, br',
-			'accept-language': 'en-US,en;q=0.9,fa-IR;q=0.8,fa;q=0.7',
-			'authorization': f'Basic {token}',
-			'origin': 'https://divar.ir',
-			'referer': 'https://divar.ir/',
-			'sec-ch-ua': '"Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"',
-			'sec-ch-ua-mobile': '?0',
-			'sec-ch-ua-platform': '"Linux"',
-			'sec-fetch-dest': 'empty',
-			'sec-fetch-mode': 'cors',
-			'sec-fetch-site': 'same-site',
-			'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+    return  {'accept': 'application/json, text/plain, */*',
+   'accept-encoding': 'gzip, deflate, br',
+   'accept-language': 'en-US,en;q=0.9,fa-IR;q=0.8,fa;q=0.7',
+   'authorization': f'Basic {token}',
+   'origin': 'https://divar.ir',
+   'referer': 'https://divar.ir/',
+   'sec-ch-ua': '"Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"',
+   'sec-ch-ua-mobile': '?0',
+   'sec-ch-ua-platform': '"Linux"',
+   'sec-fetch-dest': 'empty',
+   'sec-fetch-mode': 'cors',
+   'sec-fetch-site': 'same-site',
+   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
     }
 def write(token: str):
     with open('token', 'w') as w:
@@ -96,7 +97,7 @@ def read():
     except FileNotFoundError:
         return False
 class divar:
-    def __init__(self):
+    def init(self):
         self.Session = session()
     def checkNumber(self, get: str):
         try:
@@ -122,7 +123,8 @@ class divar:
         
     def login(self, code):
         try:
-            self.token = self.Session.post(url=urlConfirm, json={"phone": self.phone, "code": code}).json()['token']
+		MrVrs, [1/21/2022 7:13 PM]
+self.token = self.Session.post(url=urlConfirm, json={"phone": self.phone, "code": code}).json()['token']
             write(self.token)
             return True
         except (KeyError, TimeoutError):
